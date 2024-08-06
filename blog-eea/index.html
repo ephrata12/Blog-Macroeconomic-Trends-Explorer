@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Ephrata Getachew, Aika Shorayeva, Ebony Wamwitha">
+<meta name="dcterms.date" content="2023-12-13">
+
+<title>Macroeconomic Trends Explorer</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/quarto.js"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="index_files/libs/quarto-html/anchor.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="index_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+<script src="index_files/libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="index_files/libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="index_files/libs/datatables-binding-0.29/datatables.js"></script>
+<script src="index_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="index_files/libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="index_files/libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="index_files/libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script>
+<link href="index_files/libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
+<script src="index_files/libs/nouislider-7.0.10/jquery.nouislider.min.js"></script>
+<link href="index_files/libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
+<script src="index_files/libs/selectize-0.12.0/selectize.min.js"></script>
+<link href="index_files/libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="index_files/libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#k-means-clsutering-over-hdi-indicators" id="toc-k-means-clsutering-over-hdi-indicators" class="nav-link" data-scroll-target="#k-means-clsutering-over-hdi-indicators">k-Means Clsutering over HDI Indicators</a>
+  <ul class="collapse">
+  <li><a href="#cluster-mapping" id="toc-cluster-mapping" class="nav-link" data-scroll-target="#cluster-mapping">Cluster Mapping</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation</a></li>
+  </ul></li>
+  <li><a href="#predictive-model" id="toc-predictive-model" class="nav-link" data-scroll-target="#predictive-model">Predictive Model</a></li>
+  <li><a href="#table" id="toc-table" class="nav-link" data-scroll-target="#table">Table</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#suggestions-for-the-future" id="toc-suggestions-for-the-future" class="nav-link" data-scroll-target="#suggestions-for-the-future">Suggestions for the future</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Macroeconomic Trends Explorer</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Ephrata Getachew, Aika Shorayeva, Ebony Wamwitha </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 13, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Knowing what influences a country’s development is a never-ending task in the field of macroeconomics. Expanding upon the work completed in the middle of the semester, our final assignment explores the macroeconomic patterns in many nations. However, this time, our focal point revolves around key indicators that shape the <strong>Human Development Index (HDI)</strong>, including <strong>life expectancy at birth</strong>, <strong>expected and mean years of schooling</strong>, and <strong>Gross National Income (GNI) per capita</strong>. Through the use of unsupervised learning, we aim to cluster countries based on these HDI indicators, revealing trends and ideas beyond geographic borders. The main goal of our research is to predict the HDI category a certain nation may fall into, and potentially compare the results with the recognized HDI Rank list. We hope that this effort will help evaluate our model’s accuracy. We also hope to develop a predictive model for countries’ <strong>Gross Domestic Product (GDP)</strong> using a combination of the HDI indicators. By dividing the data into training and testing sets, our method makes it possible to carefully assess the prediction accuracy.</p>
+<section id="k-means-clsutering-over-hdi-indicators" class="level2">
+<h2 class="anchored" data-anchor-id="k-means-clsutering-over-hdi-indicators">k-Means Clsutering over HDI Indicators</h2>
+<p><strong>HDI (Human Development Index)</strong> - a commonly used measure of each country’s social and economic development - is determined on the basis of following factors:</p>
+<ol type="1">
+<li>Health</li>
+<li>Education</li>
+<li>Standard of Living</li>
+</ol>
+<p>Calculated as a geometric mean of the 3, HDI Rank is assigned to the countries, whcih are then put into 4 categories, from very high human development (&gt; 0.8) to low human development (&lt; 0.55).</p>
+<p>For our Cluster Analysis, we tried to imitate this process of categorizing countries using different means. Namely, we clustered all of the countries in <em>3-dimensional space</em> over three variables (Expected Years of Schooling, Life Expectancy, and GNI) that we chose to signify the factors mentioned above. The visualization for that can be seen in the link below.</p>
+<p><a href="https://rxl6s6-egetachew1.shinyapps.io/blog-eea/">3-Dimensional Clustering Visualization</a></p>
+<section id="cluster-mapping" class="level3">
+<h3 class="anchored" data-anchor-id="cluster-mapping">Cluster Mapping</h3>
+<p>While it the 3-dimensional visualization helps us makes sense of how clusters were made, a map might aid us better to see which countries were grouped together by our model.</p>
+<p><img src="img/cluster_map.png" class="img-fluid"></p>
+</section>
+<section id="interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation">Interpretation</h3>
+<p>While there are some distinct patterns (e.g., Northern American and European countries getting grouped together), which seem to coincide with the categories generated by UNDP, we also observe a lot of inconsistencies across 2 lists. There are several potential reasons for that:</p>
+<ul>
+<li><dl>
+<dt><strong>Different Methodologies</strong></dt>
+<dd>
+As was mentioned previously, HDI Rank of individual countries is calculated as a geometric mean of the variables of interest. There are also very strict points of cutout, based on which UN puts different countries into different categories of human development. Meanwhile, rather than categorizing countries in a linear manner k-Means clustering over multiple variables identifies distinct clusters of datapoint in space, which might not always coincide with the list generated via the previous method.
+</dd>
+</dl></li>
+<li><dl>
+<dt><strong>Different Variables</strong></dt>
+<dd>
+For research purposes, we have identified 3 variables of interest, including Expected Years of Schooling, Life Expectancy, and GNI to signify various facets of human development. UNDP also uses the same variables. However, oftentimes, they include several other variation of these variables (e.g., rate of education completion) to the mix to account for a greater picture.
+</dd>
+</dl></li>
+<li><dl>
+<dt><strong>Other Factors</strong></dt>
+<dd>
+While not disclosed to public, there might be series of different factors that UN considers whlist making the ranking, which we might’ve not accounted for
+</dd>
+</dl></li>
+</ul>
+</section>
+</section>
+<section id="predictive-model" class="level2">
+<h2 class="anchored" data-anchor-id="predictive-model">Predictive Model</h2>
+<p>A linear regression model was developed using the macro_trends_imp dataset to predict Gross Domestic Product (GDP). The model leverages three key predictors: <strong>Gross National Income (gni)</strong>, <strong>Years of Schooling (yrs_sch)</strong>, and <strong>Life Expectancy (life_exp)</strong>. The dataset was split into a training set, encompassing observations up to the year 2018, and a test set comprising data from 2019 onwards. The assessment of the model’s performance involved analyzing prediction errors and conducting linear regression analyses for each predictor.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = gdp ~ gni + yrs_sch + life_exp, data = train)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-33889  -3440  -2320  -1092 171852 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 2057.86984 1867.13639   1.102  0.27046    
+gni            0.98131    0.01225  80.132  &lt; 2e-16 ***
+yrs_sch      673.79621   98.41495   6.846 8.69e-12 ***
+life_exp    -109.97676   36.23417  -3.035  0.00242 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 12730 on 4119 degrees of freedom
+Multiple R-squared:  0.706, Adjusted R-squared:  0.7058 
+F-statistic:  3297 on 3 and 4119 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>In the linear regression analysis on GDP, predictors such as gni and yrs_sch exhibit strong positive effects, while life_exp shows a weaker negative impact. The R-squared value of 0.7036 indicates that the model explains approximately 70.36% of GDP variability.</p>
+<div class="cell" data-layout-align="right">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-right">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The linear regression model trained on the data have not accurately captured the relationship between <strong>GDP</strong> and <strong>GNI</strong> due to the presence of outliers. The plot suggests that the model struggled to fit the extreme values on the left side, potentially resulting in skewed predictions.</p>
+</section>
+<section id="table" class="level2">
+<h2 class="anchored" data-anchor-id="table">Table</h2>
+<div class="cell">
+<div class="cell-output-display">
+
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-a500a9627ef71527ce68" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-a500a9627ef71527ce68">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;Afghanistan&quot;,&quot;Albania&quot;,&quot;Algeria&quot;,&quot;American Samoa&quot;,&quot;Andorra&quot;,&quot;Angola&quot;,&quot;Antigua and Barbuda&quot;,&quot;Argentina&quot;,&quot;Armenia&quot;,&quot;Aruba&quot;,&quot;Australia&quot;,&quot;Austria&quot;,&quot;Azerbaijan&quot;,&quot;Bahamas, The&quot;,&quot;Bahrain&quot;,&quot;Bangladesh&quot;,&quot;Barbados&quot;,&quot;Belarus&quot;,&quot;Belgium&quot;,&quot;Belize&quot;,&quot;Benin&quot;,&quot;Bermuda&quot;,&quot;Bhutan&quot;,&quot;Bolivia&quot;,&quot;Bosnia and Herzegovina&quot;,&quot;Botswana&quot;,&quot;Brazil&quot;,&quot;British Virgin Islands&quot;,&quot;Brunei Darussalam&quot;,&quot;Bulgaria&quot;,&quot;Burkina Faso&quot;,&quot;Burundi&quot;,&quot;Cabo Verde&quot;,&quot;Cambodia&quot;,&quot;Cameroon&quot;,&quot;Canada&quot;,&quot;Cayman Islands&quot;,&quot;Central African Republic&quot;,&quot;Chad&quot;,&quot;Channel Islands&quot;,&quot;Chile&quot;,&quot;China&quot;,&quot;Colombia&quot;,&quot;Comoros&quot;,&quot;Congo, Dem. Rep.&quot;,&quot;Congo, Rep.&quot;,&quot;Costa Rica&quot;,&quot;Cote d&#39;Ivoire&quot;,&quot;Croatia&quot;,&quot;Cuba&quot;,&quot;Curacao&quot;,&quot;Cyprus&quot;,&quot;Czechia&quot;,&quot;Denmark&quot;,&quot;Djibouti&quot;,&quot;Dominica&quot;,&quot;Dominican Republic&quot;,&quot;Ecuador&quot;,&quot;Egypt, Arab Rep.&quot;,&quot;El Salvador&quot;,&quot;Equatorial Guinea&quot;,&quot;Eritrea&quot;,&quot;Estonia&quot;,&quot;Eswatini&quot;,&quot;Ethiopia&quot;,&quot;Faroe Islands&quot;,&quot;Fiji&quot;,&quot;Finland&quot;,&quot;France&quot;,&quot;French Polynesia&quot;,&quot;Gabon&quot;,&quot;Gambia, The&quot;,&quot;Georgia&quot;,&quot;Germany&quot;,&quot;Ghana&quot;,&quot;Gibraltar&quot;,&quot;Greece&quot;,&quot;Greenland&quot;,&quot;Grenada&quot;,&quot;Guam&quot;,&quot;Guatemala&quot;,&quot;Guinea&quot;,&quot;Guinea-Bissau&quot;,&quot;Guyana&quot;,&quot;Haiti&quot;,&quot;Honduras&quot;,&quot;Hong Kong SAR, China&quot;,&quot;Hungary&quot;,&quot;Iceland&quot;,&quot;India&quot;,&quot;Indonesia&quot;,&quot;Iran, Islamic Rep.&quot;,&quot;Iraq&quot;,&quot;Ireland&quot;,&quot;Isle of Man&quot;,&quot;Israel&quot;,&quot;Italy&quot;,&quot;Jamaica&quot;,&quot;Japan&quot;,&quot;Jordan&quot;,&quot;Kazakhstan&quot;,&quot;Kenya&quot;,&quot;Kiribati&quot;,&quot;Korea, Dem. People&#39;s Rep.&quot;,&quot;Korea, Rep.&quot;,&quot;Kosovo&quot;,&quot;Kuwait&quot;,&quot;Kyrgyz Republic&quot;,&quot;Lao PDR&quot;,&quot;Latvia&quot;,&quot;Lebanon&quot;,&quot;Lesotho&quot;,&quot;Liberia&quot;,&quot;Libya&quot;,&quot;Liechtenstein&quot;,&quot;Lithuania&quot;,&quot;Luxembourg&quot;,&quot;Macao SAR, China&quot;,&quot;Madagascar&quot;,&quot;Malawi&quot;,&quot;Malaysia&quot;,&quot;Maldives&quot;,&quot;Mali&quot;,&quot;Malta&quot;,&quot;Marshall Islands&quot;,&quot;Mauritania&quot;,&quot;Mauritius&quot;,&quot;Mexico&quot;,&quot;Micronesia, Fed. Sts.&quot;,&quot;Moldova&quot;,&quot;Monaco&quot;,&quot;Mongolia&quot;,&quot;Montenegro&quot;,&quot;Morocco&quot;,&quot;Mozambique&quot;,&quot;Myanmar&quot;,&quot;Namibia&quot;,&quot;Nauru&quot;,&quot;Nepal&quot;,&quot;Netherlands&quot;,&quot;New Caledonia&quot;,&quot;New Zealand&quot;,&quot;Nicaragua&quot;,&quot;Niger&quot;,&quot;Nigeria&quot;,&quot;North Macedonia&quot;,&quot;Northern Mariana Islands&quot;,&quot;Norway&quot;,&quot;Oman&quot;,&quot;Pakistan&quot;,&quot;Palau&quot;,&quot;Panama&quot;,&quot;Papua New Guinea&quot;,&quot;Paraguay&quot;,&quot;Peru&quot;,&quot;Philippines&quot;,&quot;Poland&quot;,&quot;Portugal&quot;,&quot;Puerto Rico&quot;,&quot;Qatar&quot;,&quot;Romania&quot;,&quot;Russian Federation&quot;,&quot;Rwanda&quot;,&quot;Samoa&quot;,&quot;San Marino&quot;,&quot;Sao Tome and Principe&quot;,&quot;Saudi Arabia&quot;,&quot;Senegal&quot;,&quot;Serbia&quot;,&quot;Seychelles&quot;,&quot;Sierra Leone&quot;,&quot;Singapore&quot;,&quot;Sint Maarten (Dutch part)&quot;,&quot;Slovak Republic&quot;,&quot;Slovenia&quot;,&quot;Solomon Islands&quot;,&quot;Somalia&quot;,&quot;South Africa&quot;,&quot;South Sudan&quot;,&quot;Spain&quot;,&quot;Sri Lanka&quot;,&quot;St. Kitts and Nevis&quot;,&quot;St. Lucia&quot;,&quot;St. Martin (French part)&quot;,&quot;St. Vincent and the Grenadines&quot;,&quot;Sudan&quot;,&quot;Suriname&quot;,&quot;Sweden&quot;,&quot;Switzerland&quot;,&quot;Syrian Arab Republic&quot;,&quot;Tajikistan&quot;,&quot;Tanzania&quot;,&quot;Thailand&quot;,&quot;Timor-Leste&quot;,&quot;Togo&quot;,&quot;Tonga&quot;,&quot;Trinidad and Tobago&quot;,&quot;Tunisia&quot;,&quot;Turkiye&quot;,&quot;Turkmenistan&quot;,&quot;Turks and Caicos Islands&quot;,&quot;Tuvalu&quot;,&quot;Uganda&quot;,&quot;Ukraine&quot;,&quot;United Arab Emirates&quot;,&quot;United Kingdom&quot;,&quot;United States&quot;,&quot;Uruguay&quot;,&quot;Uzbekistan&quot;,&quot;Vanuatu&quot;,&quot;Venezuela, RB&quot;,&quot;Viet Nam&quot;,&quot;Virgin Islands (U.S.)&quot;,&quot;West Bank and Gaza&quot;,&quot;Yemen, Rep.&quot;,&quot;Zambia&quot;,&quot;Zimbabwe&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"262.185\" data-max=\"204190.973\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"-187.721\" data-max=\"120148.86\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"9.735\" data-max=\"196483.764\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165","166","167","168","169","170","171","172","173","174","175","176","177","178","179","180","181","182","183","184","185","186","187","188","189","190","191","192","193","194","195","196","197","198","199","200","201","202","203","204","205","206","207","208","209","210","211","212","213","214","215","216","217","218","219","220","221","222","223","224","225","226","227","228","229","230","231","232","233","234","235","236","237","238","239","240","241","242","243","244","245","246","247","248","249","250","251","252","253","254","255","256","257","258","259","260","261","262","263","264","265","266","267","268","269","270","271","272","273","274","275","276","277","278","279","280","281","282","283","284","285","286","287","288","289","290","291","292","293","294","295","296","297","298","299","300","301","302","303","304","305","306","307","308","309","310","311","312","313","314","315","316","317","318","319","320","321","322","323","324","325","326","327","328","329","330","331","332","333","334","335","336","337","338","339","340","341","342","343","344","345","346","347","348","349","350","351","352","353","354","355","356","357","358","359","360","361","362","363","364","365","366","367","368","369","370","371","372","373","374","375","376","377","378","379","380","381","382","383","384","385","386","387","388","389","390","391","392","393","394","395","396","397","398","399","400","401","402","403","404","405","406","407","408","409","410","411","412","413","414","415","416","417","418","419","420","421","422","423","424","425","426","427","428","429","430","431","432","433","434","435","436","437","438","439","440","441","442","443","444","445","446","447","448","449","450","451","452","453","454","455","456","457","458","459","460","461","462","463","464","465","466","467","468","469","470","471","472","473","474","475","476","477","478","479","480","481","482","483","484","485","486","487","488","489","490","491","492","493","494","495","496","497","498","499","500","501","502","503","504","505","506","507","508","509","510","511","512","513","514","515","516","517","518","519","520","521","522","523","524","525","526","527","528","529","530","531","532","533","534","535","536","537","538","539","540","541","542","543","544","545","546","547","548","549","550","551","552","553","554","555","556","557","558","559","560","561","562","563","564","565","566","567","568","569","570","571","572","573","574","575","576","577","578","579","580","581","582","583","584","585","586","587","588","589","590","591","592","593","594","595","596","597","598","599","600","601","602","603","604","605","606","607","608","609","610","611","612","613","614","615","616","617","618","619","620","621","622","623","624","625","626","627","628","629","630","631","632","633","634","635","636","637","638","639","640","641","642","643","644","645","646","647","648","649","650","651","652","653","654","655","656","657","658","659","660","661","662","663","664","665","666","667","668","669","670","671","672","673","674","675","676","677","678","679","680","681","682","683","684","685","686","687","688","689","690","691","692","693","694","695","696","697","698","699","700","701","702","703","704","705","706","707","708","709","710","711","712","713","714","715","716","717","718","719","720","721","722","723","724","725","726","727","728","729","730","731","732","733","734","735","736","737","738","739","740","741","742","743","744","745","746","747","748","749","750","751","752","753","754","755","756","757","758","759","760","761","762","763","764","765","766","767","768","769","770","771","772","773","774","775","776","777","778","779","780","781","782","783","784","785","786","787","788","789","790","791","792","793","794","795","796","797","798","799","800","801","802","803","804","805","806","807","808","809","810","811","812","813","814","815","816","817","818","819","820","821","822","823","824","825","826","827","828","829","830","831","832","833","834","835","836","837","838","839","840","841","842","843","844","845","846","847","848","849","850","851","852","853","854","855","856","857","858","859","860","861","862","863","864","865","866","867","868"],["Sudan","Qatar","Eritrea","South Sudan","Bahamas, The","Mali","Equatorial Guinea","Equatorial Guinea","China","Guyana","Bahamas, The","Pakistan","Panama","Faroe Islands","Djibouti","Bahamas, The","Mauritania","Sudan","Dominica","Pakistan","Eritrea","South Sudan","Maldives","Pakistan","Iceland","Iceland","Equatorial Guinea","Slovak Republic","Panama","Senegal","Djibouti","Eritrea","South Sudan","St. Lucia","Malta","Switzerland","Tanzania","Tanzania","Sudan","Pakistan","Hong Kong SAR, China","Guyana","Malta","Mauritania","Antigua and Barbuda","Mauritania","Antigua and Barbuda","Switzerland","Bahamas, The","Senegal","Netherlands","Gambia, The","Niger","Mauritania","Switzerland","Niger","Niger","Mali","Senegal","Tanzania","Gambia, The","Eritrea","Sudan","Syrian Arab Republic","Mali","Djibouti","Mali","New Zealand","Senegal","Cyprus","Tanzania","Slovak Republic","Solomon Islands","Dominica","Gambia, The","Djibouti","Slovak Republic","Equatorial Guinea","Malta","Ethiopia","Maldives","Malta","Dominica","Ethiopia","Turkmenistan","Madagascar","Central African Republic","St. Lucia","Central African Republic","Guatemala","Slovak Republic","Syrian Arab Republic","Cyprus","Niger","Australia","Ethiopia","Central African Republic","Qatar","Gambia, The","Oman","Aruba","Turkmenistan","Oman","Sweden","South Sudan","Oman","Hungary","Burkina Faso","Lao PDR","Channel Islands","Bhutan","Iraq","Chad","Chad","Lebanon","Lebanon","Seychelles","Hong Kong SAR, China","Solomon Islands","Bangladesh","Bangladesh","Macao SAR, China","Lebanon","Honduras","Central African Republic","Turks and Caicos Islands","Lithuania","Maldives","Bangladesh","Chad","Seychelles","Iraq","Honduras","Guinea","Guatemala","Iraq","Cyprus","Korea, Dem. People's Rep.","Dominica","Israel","Bolivia","Channel Islands","Zambia","Honduras","Honduras","Iceland","Turkmenistan","Channel Islands","Bahrain","Guatemala","Burkina Faso","Cyprus","Ethiopia","Chad","Channel Islands","India","Maldives","Bahrain","St. Martin (French part)","Madagascar","Guinea","Israel","Zambia","North Macedonia","Kosovo","Panama","Guinea","Kazakhstan","Belize","Kazakhstan","Israel","Myanmar","Lebanon","Guinea","Madagascar","Burkina Faso","Madagascar","Lao PDR","Vanuatu","Guatemala","Seychelles","Lao PDR","St. Martin (French part)","Cote d'Ivoire","Burkina Faso","Solomon Islands","Bolivia","Rwanda","Korea, Dem. People's Rep.","Seychelles","Malaysia","China","Cote d'Ivoire","Cabo Verde","Malaysia","Malaysia","Antigua and Barbuda","Congo, Dem. Rep.","Myanmar","Micronesia, Fed. Sts.","Micronesia, Fed. Sts.","Vanuatu","Haiti","Burundi","Oman","Cote d'Ivoire","Syrian Arab Republic","Viet Nam","Bosnia and Herzegovina","Angola","Kosovo","Micronesia, Fed. Sts.","Costa Rica","Myanmar","India","St. Martin (French part)","Congo, Dem. Rep.","Sierra Leone","Egypt, Arab Rep.","Kosovo","Haiti","North Macedonia","Aruba","Turkmenistan","Bangladesh","Viet Nam","Egypt, Arab Rep.","China","St. Martin (French part)","Solomon Islands","Haiti","Angola","China","Cote d'Ivoire","Viet Nam","North Macedonia","Vanuatu","Bahrain","Korea, Dem. People's Rep.","Congo, Dem. Rep.","Sierra Leone","Faroe Islands","Bolivia","Benin","Cabo Verde","France","Kosovo","Canada","Jordan","Belize","Egypt, Arab Rep.","Venezuela, RB","Costa Rica","Haiti","North Macedonia","Cabo Verde","Bhutan","Sierra Leone","Burundi","Ghana","Congo, Rep.","Jordan","Zambia","El Salvador","Angola","Nicaragua","Bhutan","Kyrgyz Republic","Bermuda","Jordan","Panama","Bosnia and Herzegovina","Myanmar","Vanuatu","Cambodia","Congo, Rep.","Bosnia and Herzegovina","Bosnia and Herzegovina","Sri Lanka","Lao PDR","Bahrain","Tajikistan","Uruguay","British Virgin Islands","Bhutan","Costa Rica","India","United States","Jamaica","Viet Nam","Botswana","Malaysia","Congo, Rep.","Rwanda","Gabon","Ghana","Hong Kong SAR, China","Kyrgyz Republic","Uzbekistan","Czechia","Jamaica","Tajikistan","Jordan","Canada","Micronesia, Fed. Sts.","Rwanda","Estonia","Dominican Republic","India","Belize","Ghana","Antigua and Barbuda","Kenya","Belize","Nicaragua","Mozambique","Canada","Fiji","Uzbekistan","Timor-Leste","Afghanistan","Burundi","Ghana","Comoros","Cameroon","Canada","Egypt, Arab Rep.","Jamaica","Kyrgyz Republic","Nicaragua","El Salvador","Indonesia","Cambodia","Jamaica","Suriname","Rwanda","Kenya","Burundi","Nicaragua","Gibraltar","Faroe Islands","Congo, Rep.","Faroe Islands","Benin","Venezuela, RB","Saudi Arabia","Austria","Brunei Darussalam","Philippines","Cuba","Nepal","Czechia","Kenya","Cambodia","Azerbaijan","Kazakhstan","Nepal","Mozambique","Cabo Verde","Indonesia","Comoros","Serbia","Tajikistan","Bulgaria","Philippines","El Salvador","Albania","Norway","Bulgaria","Morocco","Chile","Benin","Costa Rica","Cameroon","Nigeria","Korea, Dem. People's Rep.","Ecuador","Samoa","Qatar","Guinea-Bissau","Peru","Armenia","Czechia","El Salvador","Kenya","Iraq","Saudi Arabia","Nigeria","Sri Lanka","Nepal","Comoros","Venezuela, RB","Kazakhstan","United Kingdom","Iceland","Romania","Peru","Colombia","Venezuela, RB","Cuba","Indonesia","Nepal","Portugal","Hungary","Cameroon","Mozambique","Turkiye","Benin","Bulgaria","Mongolia","Colombia","Peru","Nigeria","Serbia","Yemen, Rep.","Sri Lanka","Paraguay","Netherlands","Armenia","Zambia","West Bank and Gaza","Gibraltar","Belarus","Guinea-Bissau","Philippines","United Arab Emirates","Togo","Comoros","Morocco","Paraguay","Isle of Man","Algeria","Dominican Republic","Dominican Republic","Mongolia","Saudi Arabia","Syrian Arab Republic","Slovenia","Estonia","West Bank and Gaza","Romania","Ukraine","Uzbekistan","Morocco","Sri Lanka","Cameroon","Saudi Arabia","Bolivia","Hungary","Thailand","Gabon","Poland","Hungary","Afghanistan","Chile","Belarus","Belarus","Serbia","Portugal","Suriname","Albania","West Bank and Gaza","Mongolia","Belarus","Brunei Darussalam","Uruguay","Romania","Uruguay","Afghanistan","Latvia","Thailand","Colombia","Angola","Czechia","Ukraine","Albania","Yemen, Rep.","Indonesia","Paraguay","West Bank and Gaza","Romania","Brunei Darussalam","Ukraine","Algeria","Philippines","Serbia","Morocco","Afghanistan","Uruguay","Gibraltar","Albania","Tunisia","Mexico","Estonia","Yemen, Rep.","Sierra Leone","Poland","Gabon","Congo, Dem. Rep.","Armenia","Togo","Poland","Mexico","Austria","Papua New Guinea","Bulgaria","Peru","Colombia","Chile","Sao Tome and Principe","Austria","Azerbaijan","Tunisia","Switzerland","Guyana","Estonia","Samoa","Italy","Algeria","Korea, Rep.","Croatia","Mauritius","Fiji","Korea, Rep.","Togo","Sao Tome and Principe","Uzbekistan","France","Japan","Togo","Cambodia","Gibraltar","Montenegro","Dominican Republic","Ecuador","Armenia","Netherlands","Netherlands","Chile","Samoa","Yemen, Rep.","Mexico","Papua New Guinea","Tunisia","Portugal","Samoa","Papua New Guinea","Montenegro","France","Korea, Rep.","Mauritius","Tunisia","Poland","Timor-Leste","Japan","United Kingdom","Aruba","Brazil","Paraguay","Grenada","Portugal","Mongolia","Italy","Lithuania","Mexico","Japan","Ecuador","Fiji","Croatia","Thailand","Lithuania","British Virgin Islands","Thailand","Montenegro","St. Lucia","Slovenia","United Arab Emirates","Mozambique","Italy","Mauritius","Russian Federation","Azerbaijan","Croatia","Brazil","United Arab Emirates","Croatia","United Kingdom","Lithuania","Papua New Guinea","St. Kitts and Nevis","Belgium","Bermuda","South Africa","Moldova","Slovenia","South Africa","Sint Maarten (Dutch part)","Azerbaijan","Greece","Tajikistan","Moldova","Spain","Brazil","France","St. Vincent and the Grenadines","Italy","Moldova","St. Lucia","Timor-Leste","Kyrgyz Republic","Russian Federation","Sao Tome and Principe","Russian Federation","Montenegro","Gabon","Slovenia","Botswana","Cuba","Libya","Singapore","New Zealand","New Zealand","Spain","Latvia","Mauritius","Kiribati","Brazil","New Zealand","United Kingdom","Japan","Kiribati","Turkiye","Ecuador","Moldova","British Virgin Islands","British Virgin Islands","Iran, Islamic Rep.","Nigeria","Bermuda","Korea, Rep.","Fiji","Tonga","St. Vincent and the Grenadines","Georgia","Russian Federation","Latvia","Somalia","Uganda","Spain","Botswana","Suriname","Zimbabwe","South Africa","Malawi","Iran, Islamic Rep.","Latvia","Sao Tome and Principe","Iran, Islamic Rep.","Tonga","Ukraine","Kiribati","Iran, Islamic Rep.","Algeria","Tonga","Barbados","Georgia","Namibia","Finland","Tuvalu","Guinea-Bissau","Georgia","Puerto Rico","South Africa","Somalia","Eswatini","Turkiye","Guinea-Bissau","United States","Botswana","Curacao","Uganda","Eswatini","Georgia","Lesotho","Liberia","United States","Kiribati","Zimbabwe","Lesotho","Austria","Argentina","United States","Uganda","Barbados","Nauru","Eswatini","Liberia","Namibia","Tuvalu","Liberia","Zimbabwe","Somalia","Nauru","Libya","Germany","Somalia","St. Vincent and the Grenadines","Namibia","Finland","Uganda","Lesotho","Marshall Islands","Qatar","Germany","Namibia","Isle of Man","Belgium","Cuba","Libya","Suriname","Bermuda","Germany","Germany","Tonga","Argentina","Marshall Islands","Malawi","Turks and Caicos Islands","Malawi","Turkiye","Argentina","Tuvalu","St. Vincent and the Grenadines","Eswatini","Finland","Greece","Belgium","Belgium","Liberia","Malawi","Finland","Hong Kong SAR, China","Norway","Timor-Leste","Greece","Sweden","Nauru","Trinidad and Tobago","Norway","Barbados","Argentina","Zimbabwe","Marshall Islands","Tuvalu","Puerto Rico","Denmark","Puerto Rico","Grenada","Grenada","Kuwait","Greece","Guyana","Puerto Rico","Lesotho","Denmark","Sweden","Israel","Grenada","Marshall Islands","Turks and Caicos Islands","Norway","Denmark","Sint Maarten (Dutch part)","Nauru","Singapore","Barbados","Sweden","Denmark","Australia","Trinidad and Tobago","Aruba","Palau","Libya","Brunei Darussalam","Trinidad and Tobago","Trinidad and Tobago","St. Kitts and Nevis","Australia","Macao SAR, China","St. Kitts and Nevis","Palau","Macao SAR, China","Spain","St. Kitts and Nevis","Turks and Caicos Islands","Curacao","Sint Maarten (Dutch part)","Sint Maarten (Dutch part)","American Samoa","Curacao","Palau","Kuwait","American Samoa","Curacao","American Samoa","Northern Mariana Islands","American Samoa","Palau","Isle of Man","Ireland","Singapore","Kuwait","Australia","Kuwait","Isle of Man","Singapore","Ireland","French Polynesia","United Arab Emirates","French Polynesia","Ireland","Northern Mariana Islands","Northern Mariana Islands","French Polynesia","French Polynesia","Northern Mariana Islands","Cayman Islands","Luxembourg","New Caledonia","New Caledonia","New Caledonia","Guam","Guam","New Caledonia","Liechtenstein","Andorra","Guam","Cayman Islands","Luxembourg","Andorra","Guam","Virgin Islands (U.S.)","Luxembourg","Luxembourg","Virgin Islands (U.S.)","Andorra","Andorra","Macao SAR, China","Cayman Islands","San Marino","Virgin Islands (U.S.)","Liechtenstein","Virgin Islands (U.S.)","San Marino","Cayman Islands","Greenland","San Marino","Liechtenstein","San Marino","Greenland","Greenland","Greenland","Ireland","Liechtenstein","Monaco","Monaco","Monaco","Monaco"],[1828.15,58476.199,2389.036,3673.42,30054.039,779.327,5871.325,6030.518,11560.33,10857.338,29760.341,1452.851,15166.881,53190.016,2905.561,26412.012,1612.154,1684.63,7936.305,1409.697,2527.603,4682.638,10753.121,1473.865,55886.844,53825.262,5833.103,18875.707,15388.056,1409.971,2951.897,2472.47,4270.633,10758.109,25618.889,87339.75999999999,1038.736,1040.975,1950.032,1535.718,44525.593,9126.806,28660.028,1650.319,16485.442,1609.932,17599.969,84434.77800000001,22657.035,1391.047,49979.853,655.576,545.4640000000001,1670.029,87123.66,520.919,519.679,748.688,1443.326,1056.87,668.635,2691.259,1746.183,2889.988,744.76,2811.65,745.886,42271.715,1465.106,29637.854,1028.146,18513.085,2203.983,7359.884,666.471,2820.063,18240.721,6472.071,28466.444,834.991,10964.843,30133.04,6978.47,785.485,7422.363,478.927,370.676,11060.689,375.217,4263.708,17617.049,3374.351,28329.316,507.711,60797.959,811.256,381.414,59672.642,682.211,18300.762,31762.734,7064.447,17662.243,55482.001,4081.815,18044.27,16288.987,716.0119999999999,2539.125,1389.016,4266.778,4141.388,652.703,595.664,9289.438,6107.455,15168.78,44195.262,2079.56,1784.739,1557.964,40601.217,8081.743,2446.108,362.571,25438.783,18366.94,9807.557000000001,1684.433,622.279,16747.343,4854.386,2190.974,994.437,4504.129,4170.392,26814.322,1187.102,6566.364,40802.142,3242.949,1213.088,1310.622,2487.706,2428.032,52442.362,6785.087,1479.807,22579.362,4124.144,710.471,28360.031,857.3150000000001,590.3049999999999,953.367,1944.315,7013.556,23407.196,1203.426,447.785,959.432,38176.754,1237.283,5386.203,4219.097,14069.879,972.779,11290.898,6345.323,11402.758,39591.369,1577.803,6485.726,937.703,453.858,739.673,433.838,2564.02,2634.244,4388.724,17117.026,2566.277,1067.962,2430.307,731.643,1893.104,3061.739,871.11,895.739,15859.679,10374.19,11223.153,2333.353,2949.579,10575.877,11114.543,15288.438,487.433,1347.464,2913.218,2984.93,2838.988,1387.515,270.137,18856.875,2252.543,726.739,3288.353,6251.103,2569.702,4429.976,2752.339,12030.049,1317.453,1813.535,1003.4,494.819,619.269,4088.897,4648.141,1324.283,5067.216,31857.594,5813.702,1593.347,3352.06,3896.843,10358.171,1011.386,2019.046,1247.892,2300.975,10155.511,2234.909,3409.025,5365.476,2575.931,24395.472,1083.996,501.239,634.986,56689.346,2920.197,1164.709,3690.656,38913.937,3990.986,45113.066,3765.479,5907.349,3769.036,1331.54,13373.589,1284.478,5500.399,3122.16,3219.641,608.338,264.365,1981.614,1586.318,3909.25,1257.935,4105.646,2346.846,1965.278,2878.436,1226.824,107036.239,3820.702,12307.259,5459.221,1616.209,2589.421,1465.97,1731.8,5558.083,5947.821,4458.434,2599.205,23414.219,1172.079,18214.808,1465.876,2976.904,12888.466,2085.121,62866.714,4977.415,3655.463,6394.984,11371.97,1515.894,940.407,6577.412,2040.043,43369.714,1102.664,3185.335,20206.426,5307.511,1197.211,3773.379,44234.542,2794.786,889.812,21207.314,8410.606,1961.961,5040.123,1951.065,14433.88,1616.502,5733.103,1904.284,576.224,42366.487,5678.97,3473.362,2061.019,1336.932,263.361,2014.714,1381.622,1419.328,44910.442,3835.784,4770.77,1151.097,2072.288,3774.666,3780.122,1404.199,5187.05,8756.155000000001,821.785,1705.74,262.185,2119.743,1103.602,56402.394,1504.651,54150.652,1153.726,1285.512,18856.914,46647.081,29673.169,3195.539,8042.949,1083.035,20540.054,1653.829,1429.937,5348.454,10974.245,1018.108,600.403,3642.856,3892.962,1362.778,7353.614,1281.961,7963.691,3328.042,4182.352,5158.509,79638.751,8242.314,3355.613,14358.348,1214.078,12662.423,1432.863,2401.184,970.523,5863.911,4421.294,61000.977,604.595,6550.448,5111.37,19048.087,4276.052,1754.585,4335.783,19806.115,2429.586,3988.08,1042.974,1352.955,1335.499,11298.356,42098.603,57461.802,11252.887,6446.893,6857.793,1225.318,8674.245000000001,3892.422,1061.486,22112.744,15083.599,1454.564,573.1130000000001,13990.747,1255.607,8641.819,4242.117,6404.109,6554.961,2505.463,6567.908,1182.507,4229.75,6095.379,46303.219,4561.968,1281.779,2922.468,1137.198,6217.147,633.726,3589.614,42535.966,837.4930000000001,1355.539,3081.367,6259.726,82603.61599999999,3939.361,7571.783,8205.143,4107.184,21068.998,781.391,26066.691,20269.575,3378.435,10898.922,2452.983,3187.049,3290.604,4331.474,1445.551,19621.892,3118.396,15533.609,6453.894,6641.527,15053.239,14430.477,584.3869999999999,12741.158,6267.766,6457.752,6552.084,21617.412,7008.431,4857.112,3095.5,4385.112,6252.009,30401.847,16459.978,11617.991,17342.791,553.0359999999999,16947.293,6048.1,5852.983,2298.748,20085.458,2425.635,4418.661,1017.875,4073.61,6193.362,3051.486,12279.57,30313.417,2350.4,4153.003,3527.981,7113.575,3291.879,426.229,17563.208,1219.06,4543.388,3699.288,9755.617,20118.105,1057.282,627.164,15850.293,6893.323,528.789,4256.131,892.255,14774.989,10013.724,45238.391,2408.249,9502.411,5754.31,6423.86,14095.782,1676.396,43455.7,5571.733,4094.881,88464.02899999999,6348.698,21707.241,3564.436,32114.3,3873.509,31372.471,14211.755,9672.947,4703.51,31640.215,833.86,1695.171,3356.033,35712.075,36032.394,863.144,1487.72,1550.763,7879.49,8732.081,5492.489,4522.319,48301.529,48443.732,13761.374,4223.588,1024.57,9525.43,2471.05,3897.356,19802.229,3855.569,2590.494,7684.18,38832.024,32730.651,9357.302,3830.375,16704.943,1988.983,34603.265,47491.595,30271.834,8592.209999999999,6229.212,9247.897999999999,20835.109,4106.603,32902.665,17249.718,9147.073,36043.784,5331.977,5130.665,16477.082,6127.59,18233.627,1229.748,6278.173,6515.534,9333.141,24125.392,43785.417,580.731,29373.445,10956.945,9958.469999999999,5345.441,15396.109,8255.566999999999,41276.056,13048.744,45334.157,17241.295,2455.146,22137.376,44075.861,99745.242,6189.289,3473.709,24744.841,5726.263,28972.912,5083.561,20167.559,1356.317,3439.13,28087.898,8621.731,38045.902,8460.356,31600.709,3189.336,8335.148999999999,1530.811,1211.739,10301.665,1692.435,9714.384,7390.305,6619.689,22928.763,6485.46,7172.519,9278.272000000001,59175.811,41481.987,40757.368,24785.447,16069.84,10545.333,1357.889,8831.127,39607.879,47232.272,35507.579,1433.516,13341.556,5590.542,3661.303,831.319,1345.417,5017.117,2449.588,106359.97,33644.648,4442.869,4481.478,7948.483,5424.575,10078.9,16609.075,424.392,922.023,26125.872,5810.757,7275.366,1289.199,5947.887,562.783,5453.005,15826.413,1676.027,5344.958,4628.447,2032.85,1405.469,5141.085,3995.882,5375.49,16255.627,4773.336,4152.181,47088.329,3976.798,621.852,4447.583,28138.677,6018.528,428.483,3672.653,11935.388,613.898,61829.846,6657.073,21248.772,920.548,3766.063,4931.733,1040.219,612.384,58451.607,1437.287,1342.99,969.396,47043.343,12716.224,60698.011,934.896,17168.146,8254.107,3923.577,644.162,4358.138,4197.239,646.501,1213.117,434.879,8476.004000000001,8150.632,41650.423,427.9,8234.273999999999,4228.785,46135.881,918.12,968.1079999999999,5403.219,63782.51,43284.602,4596.62,86614.11599999999,42971.058,7291.068,8347.143,7082.326,102959.255,43032.142,42726.485,4637.675,11341.268,5262.476,563.362,18122.425,573.4,12072.399,12932.47,3988.405,8031.421,4045.277,44984.734,19018.902,40620.104,43107.215,629.821,554.199,46259.197,41451.287,77805.008,1674.717,17343.61,53490.352,8614.540999999999,15576.435,76712.287,14800.838,12402.491,1306.322,5041.057,3999.76,28423.813,57203.028,29752.128,8642.703,8223.187,25777.567,18907.849,17044.795,30181.272,972.692,55898.79,51952.673,42594.319,7915.139,4984.647,19381.986,75287.20600000001,58359.584,27307.514,8708.749,61386.236,14855.69,54422.918,60113.086,58115.931,14397.55,25823.635,16232.76,6431.463,28954.067,14179.554,14480.27,18948.498,58868.481,76959.24400000001,20465.644,15078.709,34561.956,27434.88,18795.935,19036.637,17796.7,25208.378,23790.986,13288.357,15633.233,13662.754,26787.532,14303.627,14748.896,15221.555,14703.512,14396.369,11806.892,68465.005,75239.303,67175.864,24871.81,59339.684,23929.481,95137.276,67359.78999999999,79074.53999999999,18286.375,45320.642,18595.168,88966.67200000001,20345.57,20796.03,19763.167,19807.293,22260.038,78731.147,107660.137,29143.881,30419.844,31203.019,31325.396,31236.08,32337.729,149602.818,34394.414,33853.262,76609.769,104128.242,36616.101,35378.956,35620.872,107792.189,106729.025,36273.095,39447.52,39413.791,29369.558,88650.11500000001,41415.667,40822.935,146455.048,42768.391,44143.046,82170.59299999999,44000.908,45269.474,156868.01,48921.072,48514.528,48170.791,48139.584,98561.624,175886.08,166910.631,180134.541,191194.472,204190.973],[1837.885,58461.262,2434.88,3598.382,29971.296,862.596,5955.643,5935.049,11442.096,10689.642,29572.023,1261.212,14935.343,53491.421,3229.66,26086.078,1942.231,2031.255,7588.839,1058.174,2892.751,4312.951,11129.232,1084.855,56276.577,54215.116,5422.044,18458.716,14926.584,1874.204,2485.81,2948.218,4755.16,11244.358,26120.741,87852.645,1556.236,1565.837,2483.925,997.67,43970.186,9684.357,29220.071,2229.633,17070.851,2201.234,17008.217,85051.93799999999,23275.639,2010.307,50621.009,1303.831,1194.573,2324.757,86438.503,-187.721,1237.6,1472.288,2168.022,1786.27,1412.149,3442.14,2504.915,3670.46,1539.14,2011.057,1555.276,43081.961,2279.47,30453.683,1851.849,19343.097,3060.275,8224.071,1532.13,1946.791,17330.646,5544.841,29447.222,1830.083,11981.645,31178.935,8051.629,1860.897,8500.147000000001,1579.608,1472.343,12180.447,1496.757,5395.108,18769.689,4535.819,29509.084,1690.481,62004.673,2023.272,1594.562,58433.536,1950.259,19573.885,33051.167,8353.816000000001,18957.159,56792.724,5401.069,19389.379,17634.423,2124.196,3951.387,2808.996,5697.597,5599.697,2125.032,2080.398,10776.218,7615.956,16678.541,45709.037,3609.948,3315.167,3095.743,42140.653,9621.434999999999,3998.351,1918.178,27013.616,19956.43,11402.518,3302.513,2244.504,18376.804,6486.081,3849.5,2673.937,6191.979,5858.764,28509.879,2883.504,8263.106,42531.252,4981.181,2954.167,3063.57,4262.428,4210.112,54231.577,8581.442999999999,3287.622,24392.446,5938.004,2543.622,30198.657,2699.689,2435.742,2803.504,3797.769,8869.401,25266.801,3067.522,2325.187,2851.401,40087.626,3149.933,7301.815,6139.165,15990.438,2897.492,13218.402,8284.059999999999,13353.279,41544.225,3532.287,8440.415999999999,2894.212,2417.186,2704.149,2409.618,4543.892,4636.696,6393.13,19122.902,4573.84,3075.995,4447.309,2749.928,3911.997,5081.067,2891.076,2920.933,17892.823,12413.373,13264.11,4382.866,5002.773,12632.124,13173.422,17352.924,2562.203,3424.559,4990.473,5064.781,4920.349,3469.251,2376.05,20972.512,4369.349,2868.42,5435.861,8400.929,4725.763,6599.004,4921.573,14204.999,3492.542,3998.628,3189.209,2688.742,2819.896,6290.642,6855.379,3538.294,7282.49,34075.798,8035.463,3821.967,5585.368,6133.063,12603.66,3258.742,4269.763,3498.838,4558.512,12414.711,4499.79,5687.869,7644.476,4855.438,26681.313,3379.099,2809.567,2966.746,54343.932,5276.472,3522.43,6053.752,41284.423,6362.173,47489.659,6147.756,8291.924000000001,6154.402,3725.608,15772.382,3687.844,7910.538,5533.249,5632.811,3025.528,2691.802,4410.414,4018.284,6345.543,3698.597,6548.87,4791.785,4419.245,5332.831,3682.697,109495.735,6290.221,14778.468,7932.011,4089.441,5076.773,3966.194,4232.114,8064.148,8469.092000000001,6989.546,5137.337,25955.588,3715.735,20762.57,4017.83,5534.756,15451.16,4659.671,65442.277,7553.916,6239.08,8988.038,13968.88,4116.848,3542.524,9180.561,4644.54,45974.83,3716.578,5806.503,22830.346,7933.335,3823.121,6412.157,46874.878,5443.298,3545.145,23872.49,11085.851,4641.4,7724.396,4639.603,17126.284,4309.899,8431.175999999999,4603.456,3276.295,45071.574,8388.179,6189.425,4803.094,4080.296,3007.939,4770.728,4138.272,4176.156,47679.282,6605.284,7542.892,3943.035,4865.65,6569.639,6575.924,4206.012,7994.737,11576.134,3644.215,4532.521,3092.064,4958.94,3945.297,53557.308,4352.168,51301.873,4010.747,4148.818,21736.854,49528.702,32556.221,6106.587,10962.425,4004.256,23465.559,4579.501,4373.974,8297.762000000001,13926.106,3973.457,3558.349,6601.702,6853.573,4326.068,10326.156,4254.853,10938.763,6314.574,7170.236,8153.528,82641.13800000001,11251.378,6365.315,17368.979,4229.927,15681.544,4452.307,5420.882,3993.332,8887.299000000001,7446.194,64027.698,3639.868,9586.546,8147.678,22085.493,7317.906,4796.507,7389.654,22864.943,5490.168,7050.063,4105.277,4415.307,4398.618,14363.294,45170.606,54383.004,14334.777,9532.333000000001,9949.219999999999,4322.728,11777.733,7004.817,4180.161,25234.516,18206.849,4577.818,3707.128,17125.574,4392.211,11780.913,7382.948,9547.92,9701.380999999999,5655.281,9722.796,4337.808,7389.607,9256.466,49468.149,7736.861,4468.587,6118.341,4340.037,9428.659,3845.702,6802.796,45752.15,4060.794,4581.255,6308.927,9487.469999999999,79370.942,7178.31,10810.897,11445.239,7354.062,24319.211,4032.892,29318.648,23525.998,6636.482,14161.084,5717.256,6452.597,6559.473,7600.765,4717.46,22897.953,6395.138,18811.491,9732.745999999999,9924.307000000001,18337.688,17715.708,3874.829,16035.222,9569.931,9760.093999999999,9855.023999999999,24920.868,10321.29,8170.533,6412.584,7706.334,9574.638000000001,33737.598,19800.153,14960.268,20685.226,3896.921,20299.947,9403.819,9215.791999999999,5667.22,23464.059,5810.594,7804.705,4404.784,7465.875,9585.973,6444.15,15674.863,33710.792,5747.974,7555.577,6931.532,10521.25,6703.727,3843.052,20981.922,4641.774,7968.949,7127.943,13187.456,23559.996,4499.67,4070.186,19296.017,10358,3999.364,7730.034,4372.536,18258.473,13500.354,48741.995,5925.253,13026.169,9279.781000000001,9967.877,17645.232,5229.805,47012.799,9131.732,7658.426,84899.181,9916.502,25277.521,7136.33,35694.494,7457.636,34967.173,17809.542,13279.321,8310.165999999999,35249.913,4444.798,5320.932,6986.013,39345.882,39666.985,4503.36,5129.334,5192.666,11527.908,12384.792,9146.279,8179.576,51962.138,52110.052,17431.134,7897.433,4700.1,13207.122,6166.771,7594.014,23510.284,7564.009,6307.781,11403.855,42562.894,36463.08,13097.197,7582.348,20458.078,5743.837,38369.192,51265.423,34050.005,12386.567,10046.291,13074.596,24673.327,7957.513,36759.327,21109.285,13008.574,39936.03,9229.271000000001,9030.364,20393.135,10048.247,22157.354,5160.423,10214.332,10452.47,13282.598,28076.663,47754.072,4553.725,33347.04,14935.496,13938.208,9326.991,19386.803,12257.146,45284.386,17070.926,49357.213,21271.103,6488.242,26207.817,48153.114,103827.01,10276.866,7562.404,28835.318,9825.289000000001,33076.137,9196.394,24285.814,5478.508,7561.769,32241.839,12787.956,42213.053,12635.488,35777.443,7377.773,12531.09,5728.841,5417.516,14507.884,5919.427,13946.662,11625.601,10868.191,27181.054,10744.105,11439.351,13566.247,54822.695,45842.156,45126.937,29156.158,20443.122,14936.722,5751.253,13227.674,44004.758,51654.272,39936.796,5866.141,17778.163,10031.839,8103.293,5281.455,5807.548,9481.589,6923.202,110837.833,38123.688,8939.701999999999,8978.996999999999,12447.12,9930.451999999999,14587.11,21127.731,4950.898,5456.198,30682.147,10380.663,11849.908,5865.719,10531.105,5148.393,10040.462,20426.861,6296.936,9969.657999999999,9253.958000000001,6660.181,6032.942,9774.544,8642.775,10051.485,20939.292,9457.791999999999,8851.712,51798.735,8687.643,5337.479,9169.483,23402.403,10756.941,5172.95,8420.07,16703.394,5385.475,66629.428,11469.849,26102.925,5795.337,8671.517,9867.861000000001,5987.922,5590.32,63430.989,6420.452,6329.68,5960.363,52045.301,17723.019,65713.046,5971.799,22208.394,13303.39,8982.815000000001,5703.7,9426.849,9292.218000000001,5759.832,6348.751,5606.032,13657.939,13336.018,46835.902,5630.414,13458.178,9460.226000000001,51375.156,6163.043,6236.952,10686.391,69088.649,48628.89,9978.573,81232.159,48373.562,12694.4,13768.437,12560.923,108459.082,48560.785,48256.726,10169.341,16918.917,10917.304,6223.186,23797.004,6261.808,17777.675,18648.105,9756.914000000001,13805.164,9819.563,50775.722,24826.221,46441.85,48937.035,6471.933,6402.801,52112.692,47354.006,83726.717,7634.487,23311.459,59465.441,14647.626,21612.909,82760.75,20865.543,18469.847,7429.926,11177.586,10151.986,22241.662,63396.228,23557.369,14850.206,14451.906,32030.17,25208.31,10724.065,23829.916,7328.361,62277.333,58398.706,36093.282,14422.158,11496.1,25926.049,81951.477,65026.209,33995.009,15457.306,54585.036,21685.795,61263.716,67047.815,65108.779,21484.513,32954.078,23470.567,13679.486,36499.206,21733.902,22044.346,26729.037,66705.304,69090.262,28371.597,23022.812,42532.932,35662.565,27032.143,27293.871,26217.491,33771.793,32903.648,3695.444,25278.278,23360.736,36611.474,4236.645,24967.847,4386.693,3514.738,3189.491,23214.313,79889.11900000001,63348.39,55248.152,37102.585,72239.234,37766.253,81036.79700000001,52937.383,64534.512,3228.032,61005.523,2893.001,73161.59600000001,4157.662,4063.749,2972.669,2872.082,4452.131,55421.435,83301.57399999999,2815.273,3151.746,3412.933,3245.49,3087.516,3063.097,120148.86,3966.716,3189.391,45866.976,73074.867,4559.516,2750.441,2953.868,74984.446,73859.14,3347.992,4852.851,4168.126,65031.466,52020.414,4424.516,3083.573,108584.125,3097.83,4273.355,42083.393,3685.726,3962.324,113233.637,4938.264,4028.513,3604.644,3500.16,50420.459,110282.792,7566.621,7488.245,7289.39,7707.209],[9.734999999999999,14.937,45.844,75.038,82.74299999999999,83.26900000000001,84.318,95.46899999999999,118.234,167.696,188.318,191.639,231.538,301.405,324.099,325.934,330.077,346.625,347.466,351.523,365.148,369.687,376.111,389.01,389.733,389.854,411.059,416.991,461.472,464.233,466.087,475.748,484.527,486.249,501.852,512.885,517.5,524.862,533.893,538.048,555.407,557.551,560.043,579.314,585.409,591.302,591.752,617.16,618.604,619.26,641.1559999999999,648.255,649.109,654.728,685.157,708.64,717.921,723.6,724.696,729.4,743.514,750.881,758.732,780.472,794.38,800.593,809.39,810.246,814.364,815.829,823.703,830.0119999999999,856.292,864.187,865.659,873.272,910.075,927.23,980.778,995.092,1016.802,1045.895,1073.159,1075.412,1077.784,1100.681,1101.667,1119.758,1121.54,1131.4,1152.64,1161.468,1179.768,1182.77,1206.714,1212.016,1213.148,1239.106,1268.048,1273.123,1288.433,1289.369,1294.916,1310.723,1319.254,1345.109,1345.436,1408.184,1412.262,1419.98,1430.819,1458.309,1472.329,1484.734,1486.78,1508.501,1509.761,1513.775,1530.388,1530.428,1537.779,1539.436,1539.692,1552.243,1555.607,1574.833,1589.49,1594.961,1618.08,1622.225,1629.461,1631.695,1658.526,1679.5,1687.85,1688.372,1695.557,1696.402,1696.742,1729.11,1738.232,1741.079,1752.948,1774.722,1782.08,1789.215,1796.356,1807.815,1813.084,1813.86,1833.151,1838.626,1842.374,1845.437,1850.137,1853.454,1855.845,1859.605,1864.096,1877.402,1891.969,1910.872,1912.65,1915.612,1920.068,1920.559,1924.713,1927.504,1938.737,1950.521,1952.856,1954.484,1954.69,1956.509,1963.328,1964.476,1975.78,1979.872,2002.452,2004.406,2005.876,2007.563,2008.033,2017.002,2018.285,2018.893,2019.328,2019.966,2025.194,2033.144,2039.183,2040.957,2049.513,2053.194,2056.247,2058.879,2064.486,2074.77,2077.095,2077.255,2079.851,2081.361,2081.736,2105.913,2115.637,2116.806,2141.681,2147.508,2149.826,2156.061,2169.028,2169.234,2174.95,2175.089,2185.093,2185.809,2193.923,2200.627,2201.745,2207.238,2214.011,2215.274,2218.204,2221.761,2228.62,2233.308,2236.22,2245.489,2247.356,2250.717,2250.946,2257.537,2259.2,2264.881,2278.844,2279,2279.507,2285.841,2295.103,2308.328,2331.76,2345.414,2356.275,2357.721,2363.096,2370.486,2371.187,2376.593,2382.277,2384.575,2385.366,2394.068,2398.793,2403.366,2410.139,2411.089,2413.17,2417.19,2427.437,2428.8,2431.966,2436.293,2440.662,2443.224,2444.939,2453.967,2454.395,2455.873,2459.496,2469.519,2471.209,2472.79,2473.232,2487.352,2500.224,2500.314,2506.065,2521.271,2531.112,2538.132,2541.369,2543.656,2547.762,2551.954,2557.852,2562.694,2574.55,2575.563,2576.501,2583.617,2593.054,2596.91,2600.954,2602.117,2603.149,2604.497,2605.116,2613.914,2621.168,2623.92,2625.824,2625.91,2638.778,2640.336,2648.512,2655.333,2665.176,2675.245,2679.439,2684.273,2688.538,2692.404,2693.397,2698.073,2699.172,2700.071,2705.087,2709.209,2716.063,2742.075,2743.364,2744.578,2756.014,2756.65,2756.828,2768.84,2769.5,2772.122,2791.938,2793.362,2794.973,2795.802,2801.813,2807.687,2819.979,2822.43,2826.781,2829.879,2839.197,2841.695,2845.086,2847.517,2848.779,2857.021,2863.306,2879.94,2881.621,2883.052,2911.048,2919.476,2921.221,2925.505,2925.672,2944.037,2949.308,2951.861,2955.349,2957.946,2958.846,2960.611,2963.29,2972.542,2972.892,2975.072,2986.532,2987.884,2995.019,3002.387,3009.064,3009.702,3010.631,3015.849,3019.121,3019.444,3019.698,3022.809,3023.388,3024.9,3026.721,3035.273,3036.098,3036.308,3037.406,3041.854,3041.922,3053.871,3058.828,3060.582,3061.983,3062.303,3062.352,3063.119,3064.938,3072.003,3078.798,3081.89,3085.44,3091.427,3097.41,3103.488,3112.395,3118.675,3121.772,3123.25,3123.254,3134.015,3134.827,3136.604,3139.094,3140.831,3143.811,3146.42,3149.818,3154.888,3155.301,3159.857,3161.087,3164.93,3174.893,3186.808,3195.873,3202.839,3211.512,3211.976,3213.182,3216.184,3223.301,3225.716,3227.56,3227.744,3232.674,3238.949,3239.114,3240.096,3246.878,3250.213,3251.501,3251.957,3256.423,3258.047,3262.162,3264.273,3265.548,3268.869,3269.291,3271.909,3276.061,3276.742,3277.882,3278.852,3282.78,3284.449,3285.231,3290.442,3294.064,3302.165,3302.342,3302.94,3303.456,3312.859,3313.421,3317.084,3321.222,3322.629,3335.751,3340.175,3342.277,3342.435,3343.885,3352.654,3355.719,3362.809,3368.472,3378.601,3384.959,3386.044,3386.909,3392.265,3392.611,3392.664,3395.293,3397.375,3397.574,3402.574,3403.551,3407.675,3411.848,3416.823,3418.714,3422.714,3425.561,3428.655,3431.839,3441.891,3442.388,3443.022,3445.724,3464.677,3470.575,3473.903,3480.281,3483.484,3486.63,3503.604,3517.004,3523.758,3525.471,3544.017,3549.45,3553.409,3557.099,3559.999,3563.545,3564.848,3567.804,3570.28,3571.894,3580.194,3584.127,3594.702,3597.787,3606.374,3606.656,3609.698,3610.938,3625.761,3629.98,3633.807,3634.591,3640.216,3641.614,3641.903,3648.418,3652.711,3653.79,3657.257,3660.609,3666.32,3669.76,3673.845,3675.53,3681.692,3695.721,3696.658,3708.055,3708.44,3717.287,3719.675,3730.87,3732.429,3739.895,3751.973,3753.135,3754.854,3765.927,3773.828,3778.171,3794.357,3817.079,3826.698,3838.218,3850.91,3856.662,3859.567,3861.501,3892.246,3897.294,3899.699,3916.053,3920.657,3923.727,3930.675,3936.159,3936.936,3949.457,3951.271,3968.655,3972.994,3973.595,3978.551,3979.738,3981.55,3990.694,4001.579,4008.33,4022.182,4023.056,4029.808,4033.096,4070.441,4077.253,4081.768,4087.577,4088.695,4090.477,4099.026,4103.225,4112.833,4118.255,4122.191,4122.639,4153.941,4166.225,4167.151,4175.132,4176.734,4188.437,4195.941,4198.03,4205.777,4206.219,4226.992,4232.278,4235.296,4248.502,4252.291,4258.645,4266.832,4287.975,4353.116,4360.169,4369.569,4370.711,4373.282,4391.389,4393.364,4396.547,4396.879,4422,4429.217,4432.625,4436.607,4441.297,4441.99,4450.136,4462.131,4464.472,4473.614,4477.863,4479.04,4496.833,4497.519,4498.637,4505.877,4508.21,4518.656,4526.506,4534.175,4556.275,4569.906,4574.542,4576.52,4583.218,4585.61,4587.457,4600.448,4620.909,4624.7,4625.511,4627.331,4627.473,4633.459,4646.893,4675.995,4683.665,4684.456,4699.531,4710.406,4710.845,4715.627,4721.9,4736.274,4738.413,4744.467,4747.417,4768.006,4771.577,4799.582,4812.776,4854.153,4874.789,4905.454,4936.128,4947.703,4977.936,4979.382,4983.165,4986.69,4990.967,5001.958,5006.795,5015.035,5036.903,5040.248,5049.283,5059.238,5059.538,5068.711,5094.979,5113.331,5135.634,5171.153,5181.935,5185.386,5185.479,5202.514,5223.904,5231.441,5239.275,5244.923,5268.844,5283.172,5306.139,5344.288,5381.953,5381.957,5402.504,5403.332,5421.294,5478.597,5499.827,5528.643,5530.241,5531.666,5577.649,5654.828,5659.824,5674.579,5688.408,5705.276,5715.635,5768.509,5773.743,5774.286,5790.988,5807.319,5821.746,5829.82,5842.112,5848.602,5853.495,5902.719,5921.709,5959.77,5967.849,5975.089,6033.085,6036.474,6048.463,6064.705,6067.356,6123.604,6136.529,6152.226,6182.151,6193.2,6194.759,6207.503,6228.719,6252.603,6300.461,6320.73,6351.356,6355.669,6378.543,6446.033,6501.037,6507.019,6511.453,6544.063,6664.271,6666.625,6687.495,6748.557,6801.2,6830.105,6840.798,6934.729,6992.848,7086.963,7130.443,7237.807,7248.023,7545.139,7554.348,7564.076,7780.539,7836.823,7868.982,7905.953,7944.103,7970.976,8227.684999999999,8236.208000000001,8257.234,8420.790999999999,8563.415000000001,9112.662,9592.913,9645.045,9697.982,9823.941999999999,10066.982,10218.951,10834.862,11188.774,11206.878,11407.421,11424.114,11890.913,11927.712,12230.775,12899.55,13836.772,14100.479,14422.407,14540.028,15058.343,15684.881,15702.167,15805.076,16187.908,16732.281,16790.498,16935.211,17807.907,23309.712,24358.563,26328.608,27268.098,27790.086,28079.906,28148.564,29274.632,29453.958,30427.698,30663.871,30742.793,31053.375,32056.585,32628.515,32667.004,32807.743,32869.885,32925.103,34594.669,35245.665,35661.908,36629.701,36991.151,37739.362,37870.923,39670.561,39869.691,40087.2,40315.182,41307.15,43634.373,43982.808,44486.015,44566.147,44639.424,48141.165,65603.288,159344.01,172646.296,183905.082,196483.764]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Country<\/th>\n      <th>GDP<\/th>\n      <th>Predicted GDP<\/th>\n      <th>Error<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"autoWidth":true,"columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false,"orderCellsTop":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>The model struggles to accurately predict GDP for countries due to the complex nature of economies. Economic systems can be unpredictable and easily influenced by external factors, making it challenging to create precise models. The limited data for some countries makes it harder to establish strong connections between predictors and GDP, resulting in less dependable predictions. Moreover, each country has unique aspects like regional dependencies and different economic structures that the chosen predictors might not fully capture.</p>
+<p>Additionally, we only considered three variables in the model, but there are more factors that we didn’t take into account. In the model, we treated the variables as independent, but in the real world, these predictors are often interdependent. For instance, consider the relationship between <strong>Gross National Income (GNI)</strong>, <strong>Years of Schooling (yrs_sch)</strong>, and <strong>Life Expectancy (life_exp)</strong>. In reality, higher GNI might positively influence both education levels and life expectancy. Neglecting such interdependencies can lead to an oversimplified model that fails to capture the intricate dynamics of the economic system. To improve accuracy, future models should consider a broader set of variables and account for the interconnections between predictors to better reflect real-world complexities.</p>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>Utilizing unsupervised learning to cluster countries and predicting GDP through supervised learning, our model provided valuable insights into the dynamics of economic development. However, a notable observation is the tendency for GDP overprediction by our model, likely influenced by the unprecedented global disruptions caused by the COVID-19 pandemic. This may emphasize how the model needs to be improved to better account for unanticipated shocks and how real-time data may need to be included for increased accuracy.</p>
+</section>
+<section id="suggestions-for-the-future" class="level1">
+<h1>Suggestions for the future</h1>
+<p>As we look to the future, our investigation of macroeconomic patterns using Human Development Index (HDI) indicators opens up new and intriguing areas for further study and improvement. Further developments of the project might consider using more sophisticated algorithms and methods, and broadening the dataset to cover a wider range of socioeconomic factors in order to improve the model. It should also be a priority to address the effects of external shocks like the COVID-19 pandemic, which may prompt the creation of future models that can adjust to unforeseen interruptions.</p>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<!-- Textbook -->
+<p>Baumer, B. S., Kaplan, D. T., and Horton, N. J. (2021), <em>Modern Data Science with R</em> (2nd ed.), Boca Raton, FL: CRC Press.</p>
+<!-- Dataset -->
+<p>World Bank (2000-2022). “World Development Indicators,” The World Bank DataBank. Available at <a href="https://databank.worldbank.org/source/world-development-indicators" class="uri">https://databank.worldbank.org/source/world-development-indicators</a>.</p>
+<!-- R package -->
+<p>C. Sievert. Interactive Web-Based Data Visualization with R, plotly, and shiny. Chapman and Hall/CRC Florida, 2020.</p>
+<p>H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2016.</p>
+<p>Schloerke B, Cook D, Larmarange J, Briatte F, Marbach M, Thoen E, Elberg A, Crowley J (2021). <em>GGally: Extension to ‘ggplot2’</em>. R package version 2.1.2, <a href="https://CRAN.R-project.org/package=GGally" class="uri">https://CRAN.R-project.org/package=GGally</a>.</p>
+<p>Stef van Buuren, Karin Groothuis-Oudshoorn (2011). mice: Multivariate Imputation by Chained Equations in R. Journal of Statistical Software, 45(3), 1-67. DOI 10.18637/jss.v045.i03.</p>
+<p>Wickham H, Averick M, Bryan J, Chang W, McGowan LD, François R, Grolemund G, Hayes A, Henry L, Hester J, Kuhn M, Pedersen TL, Miller E, Bache SM, Müller K, Ooms J, Robinson D, Seidel DP, Spinu V, Takahashi K, Vaughan D, Wilke C, Woo K, Yutani H (2019). “Welcome to the tidyverse.” <em>Journal of Open Source Software</em>, <em>4</em>(43), 1686. doi:10.21105/joss.01686 <a href="https://doi.org/10.21105/joss.01686" class="uri">https://doi.org/10.21105/joss.01686</a>.</p>
+<p>Wickham H, Vaughan D, Girlich M (2023). <em>tidyr: Tidy Messy Data</em>. R package version 1.3.0, <a href="https://CRAN.R-project.org/package=tidyr" class="uri">https://CRAN.R-project.org/package=tidyr</a>.</p>
+<p>Winston Chang, Joe Cheng, JJ Allaire, Carson Sievert, Barret Schloerke, Yihui Xie, Jeff Allen, Jonathan McPherson, Alan Diper, Barbara Borges (2023). shiny: Web Application Framework for R <a href="https://CRAN.R-project.org/package=shiny" class="uri">https://CRAN.R-project.org/package=shiny</a></p>
+<p>Xie Y, Cheng J, Tan X (2022). “DT: A Wrapper of the JavaScript Library ‘DataTables’,” R package version 0.24, available at <a href="https://CRAN.R-project.org/package=DT" class="uri">https://CRAN.R-project.org/package=DT</a>.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
