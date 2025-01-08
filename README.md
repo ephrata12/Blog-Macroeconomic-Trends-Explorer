@@ -2,7 +2,7 @@
 
 This project was a collaborative effort by the following individuals:
 
-- **Ephrata Getachew** (Repository Owner)  
+- **Ephrata Getachew**
 - **Aika Shorayeva**  
 - **Ebony Wamwitha**
   
