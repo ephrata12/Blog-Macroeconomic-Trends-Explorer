@@ -42,7 +42,7 @@ The dataset used is `shiny.csv`, containing scaled variables:
 
 This project was a collaborative effort by the following individuals:
 
-- **Ephrata Getachew**
-- **Aika Shorayeva**  
-- **Ebony Wamwitha**
+- Ephrata Getachew
+- Aika Shorayeva
+- Ebony Wamwitha
   
